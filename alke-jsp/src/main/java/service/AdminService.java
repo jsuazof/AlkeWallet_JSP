@@ -3,17 +3,17 @@ package service;
 import java.util.ArrayList;
 import java.util.List;
 
+import Dao.AdminDao;
+import Dao.BankManagerDao;
 import dto.Admin;
 import dto.BankManager;
-import jdbc.AdminJdbc;
-import jdbc.BankManagerJdbc;
 
 public class AdminService {
 	
-	AdminJdbc adminJdbc=new AdminJdbc();
-	BankManagerJdbc bankManagerJdbc=new BankManagerJdbc();
+	AdminDao adminDao=new AdminDao();
+	BankManagerDao bankManagerDao=new BankManagerDao();
 	public boolean validateAdmin(int a_id, String a_username, String a_password) {
-		Admin admin = adminJdbc.getAdminById(a_id);
+		Admin admin = adminDao.getAdminById(a_id);
 		if(admin.getAdmin_name().equals(a_username) && admin.getA_password().equals(a_password)) {
 			return true;
 		}else {
@@ -23,30 +23,30 @@ public class AdminService {
 
 	public Admin saveAdmin(Admin admin) {
 		if(admin.getAdmin_name()!= null && admin.getA_password() != null) {
-			return adminJdbc.saveAdmin(admin);
+			return adminDao.saveAdmin(admin);
 		}
 		return null;
 	}
 	
 	public boolean deleteAdmin(int id) {
-		return adminJdbc.deleteAdminById(id);
+		return adminDao.deleteAdminById(id);
 	}
 	
 	//approve
 	public boolean approval(int a_id, int m_id, String status) {
-		Admin admin = adminJdbc.getAdminById(a_id);
-		BankManager bankManager = bankManagerJdbc.getBankManagerById(m_id);
+		Admin admin = adminDao.getAdminById(a_id);
+		BankManager bankManager = bankManagerDao.getBankManagerById(m_id);
 		if(admin != null && bankManager != null) {
 			bankManager.setM_status(status);
 			bankManager.setAdmin(admin);
-			return bankManagerJdbc.approval(a_id, m_id);
+			return bankManagerDao.approval(a_id, m_id);
 		}
 		return false;
 	}
 	// View all approved BankManager
 	
 	public List<BankManager> viewAllApprovedBankManager() {
-		List<BankManager> managers = bankManagerJdbc.getAllBankManager();
+		List<BankManager> managers = bankManagerDao.getAllBankManager();
 		List<BankManager> approvedManager = new ArrayList<>();
 		if(managers != null) {
 			for(BankManager b : managers) {
@@ -64,7 +64,7 @@ public class AdminService {
 	// View All UnApproved BankManagers
 	
 	public List<BankManager> viewAllUnApprovedBankManager() {
-		List<BankManager> managers = bankManagerJdbc.getAllBankManager();
+		List<BankManager> managers = bankManagerDao.getAllBankManager();
 		List<BankManager> approvedManager = new ArrayList<>();
 		if(managers != null) {
 			for(BankManager b : managers) {
@@ -80,11 +80,11 @@ public class AdminService {
 	
 	}
 	public Admin getAdminById(int id) {
-		return adminJdbc.getAdminById(id);
+		return adminDao.getAdminById(id);
 	}
 	
 	public boolean deleteBankManagerById(int id) {
-        return bankManagerJdbc.deleteBankManagerById(id);
+        return bankManagerDao.deleteBankManagerById(id);
     }
 	
 
