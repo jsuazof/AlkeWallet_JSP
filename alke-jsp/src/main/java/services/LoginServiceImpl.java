@@ -9,8 +9,8 @@ import jakarta.servlet.http.HttpSession;
 public class LoginServiceImpl {
     private UserDao userDao = new UserDao();
     @Override
-    public Optional<String> getName(HttpServletRequest request) {
-        HttpSession session = request.getSession(); //crear la sesion
+    public Optional<String> getName(HttpServletRequest req) {
+        HttpSession session = req.getSession(); //crear la sesion
         String username = (String) session.getAttribute("username");
         if (username != null) //usuario creado
             {
