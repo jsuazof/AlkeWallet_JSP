@@ -1,28 +1,40 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Formulario de login</title>
+    <link rel="stylesheet" type="text/css" 
+	href="${pageContext.request.contextPath}/resources/css/login.css">
+    <meta charset="ISO-8859-1">
+    <title>Login</title>
 </head>
+
 <body>
-<h1>Iniciar sesión</h1>
-<form action="/Crud-Ejemplo-JEE/login" method="post">
-  <div>
-    <label for="username">Username</label>
-    <div>
-      <input type="text" name="username" id="username">
+    <div class="formulario">
+        <input type="hidden" id="status" value="<%= request.getAttribute(" status") %>">
+        <h1>Nuevo Usuario</h1>
+        <form action="registrarse" method="post">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre"  required>
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" required> <br>
+            <label for="correo">Email:</label>
+            <input type="email" id="correo" name="correo" placeholder="ejemplo@email.com" required>
+            <label for="clave">Contraseña:</label>
+            <input type="password" id="clave" name="contrasena" placeholder="*****" minlength="4" required>
+            <input type="submit" value="Registrar">
+        </form>
+        <p>Si ya tienes una cuenta. has <a href="login">Click Aquí!</a></p>
     </div>
-  </div>
-  <div>
-    <label for="password">Password</label>
-    <div>
-      <input type="password" name="password" id="password">
-    </div>
-  </div>
-  <div>
-    <input type="submit" value="Login">
-  </div>
-</form>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript">
+        var status = document.getElementById("status").value;
+        if (status == "success") {
+            swal.fire("felicitaciones", "Cuenta creada", "success");
+        } else if (status == "failed") {
+            swal.fire("Error", "no se pudo crear la cuenta", "error");
+        }
+    </script>
 </body>
 </html>
