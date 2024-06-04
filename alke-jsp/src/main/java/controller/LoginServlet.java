@@ -13,16 +13,25 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.User;
 
-@WebServlet({ "/login" })
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    RequestDispatcher dispatcher = null;
-    UserDao userDao = new UserAccess();
+    private static final String INDEX_JSP = "index.jsp";
+    private static final String HOME_URL = "home";
+    
+    private UserDao userDao;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        // Inicializar el DAO aquí para evitar crear múltiples instancias en cada solicitud
+        userDao = new UserAccess();
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        dispatcher = request.getRequestDispatcher("index.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(INDEX_JSP);
         dispatcher.forward(request, response);
     }
 
@@ -37,11 +46,10 @@ public class LoginServlet extends HttpServlet {
         if (usuario != null) {
             HttpSession session = request.getSession(true);
             session.setAttribute("id", usuario.getId());
-            response.sendRedirect("home");
+            response.sendRedirect(HOME_URL);
         } else {
-
             request.setAttribute("status", "failed");
-            dispatcher = request.getRequestDispatcher("index.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher(INDEX_JSP);
             dispatcher.forward(request, response);
         }
     }
