@@ -18,7 +18,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-dark bg-body-tertiary mb-3">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/Proyecto_Alke_Wallet/html/menu.html">Alke Wallet</a>
+            <a class="navbar-brand" href="#">AlkeWallet Bank</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -26,15 +26,9 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/Proyecto_Alke_Wallet/html/wallet.html">Depositar/Retirar</a>
+                        <a class="nav-link active" href="home">Depositar/Retirar</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Proyecto_Alke_Wallet/html/sendmoney.html">Transferencias</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Proyecto_Alke_Wallet/html/transactions.html">Últimos
-                            Movimientos</a>
-                    </li>
+                    
                 </ul>
             </div>
         </div>
