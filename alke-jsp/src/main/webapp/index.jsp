@@ -37,12 +37,12 @@
         <!-- This is a placeholder for any live alerts that may appear on the page. -->
         <div id="liveAlertPlaceholder"></div>
         <div class="row row-cols-auto">
-          <input type="hidden" id="status" value="${request.getAttribute("status")}">
+          <input type="hidden" id="status" value="${request.getAttribute('status')}">
           <!-- This is the login form. -->
           <form action="login" method="post">
             <!-- This is the logo of the bank. -->
             <div>
-              <img class="alke-icon" src="./img/Alke_Wallet_Brand.png" alt="Alke Wallet">
+              <img class="alke-icon" src="./img/Alke_Wallet_Brand.png" alt="AlkeWallet">
             </div>
 
             <!-- This is the username input field. -->
@@ -77,11 +77,11 @@
       <footer>
         <div id="footer">
           <p>&copy; 2024 Alkewallet Bank</p>
-          <div id="social-media">
-            <a href="https://facebook.com" class="social-link">Facebook</a>
-            <a href="https://twitter.com" class="social-link">Twitter</a>
-            <a href="https://instagram.com" class="social-link">Instagram</a>
-          </div>
+          <div class="icon-footer">
+            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
         </div>
       </footer>
       <!-- This is the script file for the login page. -->
