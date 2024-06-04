@@ -43,7 +43,7 @@
                         <input type="submit" value="Registrar" class="btn btn-primary">
                     </div>
                 </form>
-                <p class="text-center mt-3">Si ya tienes una cuenta, has <a href="login">click aquí!</a></p>
+                <p class="text-center mt-3">Si ya tienes cuenta<a href="login">click aquí!</a></p>
             </div>
         </div>
 
