@@ -1,13 +1,6 @@
-let balance = 0;
-
 
 $(document).ready(function () {
-  // Inicializar el saldo desde localStorage al cargar la página
-  if (localStorage.getItem("balance")) {
-    balance = parseFloat(localStorage.getItem("balance"));
-    updateBalance();
-  }
-
+ 
   // Función para mostrar alerta de Bootstrap
   const appendAlert = (message, type) => {
     const wrapper = document.createElement("div");
