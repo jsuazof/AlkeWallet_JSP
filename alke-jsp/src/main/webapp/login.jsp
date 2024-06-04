@@ -47,15 +47,20 @@
             </div>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script type="text/javascript">
-            var status = document.getElementById("status").value;
-            if (status == "success") {
-                Swal.fire("Felicitaciones", "Cuenta creada", "success");
-            } else if (status == "failed") {
-                Swal.fire("Error", "No se pudo crear la cuenta", "error");
-            }
-        </script>
+        <footer>
+            <div id="footer">
+              <p>&copy; 2024 Alkewallet Bank</p>
+              <div class="icon-footer">
+                <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+            </div>
+          </footer>
+    
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
     </body>
 
     </html>

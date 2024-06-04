@@ -80,7 +80,7 @@
     </main>
 
     <footer class="text-center mt-4">
-        <h1>Alke Wallet</h1>
+        <p>&copy; 2024 Alkewallet Bank</p>
         <div class="icon-footer">
             <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
             <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>

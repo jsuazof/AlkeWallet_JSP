@@ -101,7 +101,7 @@ footer.social-icons {
  */
 .icon-footer{
   display: flex;
-  justify-content: space-around;
+  justify-content:center;
 }
 
 /**
