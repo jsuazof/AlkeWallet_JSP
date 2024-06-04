@@ -15,36 +15,44 @@ import model.User;
 
 @WebServlet("/home")
 public class HomeServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	RequestDispatcher dispatcher = null;
+    private static final String LOGIN_URL = "login";
+    private static final String HOME_JSP = "home.jsp";
 
-	UserDao usuarioDAO = new UserAccess();
+    private UserDao userDao;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        // Inicializar el DAO aquí para evitar crear múltiples instancias en cada solicitud
+        userDao = new UserAccess();
+    }
 
-		HttpSession session = request.getSession(false);
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-		if (session == null) {
-			response.sendRedirect("login");
-		} else {
+        HttpSession session = request.getSession(false);
 
-			Object id = session.getAttribute("id");
+        if (session == null) {
+            response.sendRedirect(LOGIN_URL);
+        } else {
+            Object idObj = session.getAttribute("id");
 
-			if (id == null) {
-				response.sendRedirect("login");
-			} else {
-
-				int id2 = (int) session.getAttribute("id");
-				User usuario = usuarioDAO.obtenerUsuarioPorID(id2);
-				session.setAttribute("usuario", usuario);
-
-				dispatcher = request.getRequestDispatcher("home.jsp");
-				dispatcher.forward(request, response);
-			}
-		}
-
-	}
-
+            if (idObj instanceof Integer) {
+                int id = (int) idObj;
+                User user = userDao.obtenerUsuarioPorID(id);
+                if (user != null) {
+                    session.setAttribute("usuario", user);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher(HOME_JSP);
+                    dispatcher.forward(request, response);
+                } else {
+                    response.sendRedirect(LOGIN_URL);
+                }
+            } else {
+                response.sendRedirect(LOGIN_URL);
+            }
+        }
+    }
 }

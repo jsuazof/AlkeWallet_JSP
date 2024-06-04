@@ -1,7 +1,5 @@
 package controller;
 
-import java.io.IOException;
-
 import dao.UserAccess;
 import dao.UserDao;
 import jakarta.servlet.ServletException;
@@ -12,52 +10,48 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.User;
 
+import java.io.IOException;
+
 @WebServlet("/operacion")
 public class OperacionServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	UserDao usuarioDAO = new UserAccess();
-	User usuario = null;
-	int exitoso = 0;
+    private static final long serialVersionUID = 1L;
+    private UserDao usuarioDAO = new UserAccess();
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-		String operacionDepositar = request.getParameter("operacionDepositar");
-		String operacionRetirar = request.getParameter("operacionRetirar");
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            User usuario = (User) session.getAttribute("usuario");
+            int id = usuario.getId();
 
-		HttpSession session = request.getSession(false);
-		int id = (int) session.getAttribute("id");
+            String operacionDepositar = request.getParameter("operacionDepositar");
+            String operacionRetirar = request.getParameter("operacionRetirar");
 
-		usuario = (User) session.getAttribute("usuario");
-
-		if (operacionDepositar != null) {
-			Double monto = Double.parseDouble(request.getParameter("monto"));
-			exitoso = usuarioDAO.depositar(monto, id);
-			if (exitoso > 0) {
-				session.setAttribute("status", "success");
-				response.sendRedirect("home");
-			} else {
-				session.setAttribute("status", "failed");
-				response.sendRedirect("home");
-			}
-
-		} else if (operacionRetirar != null) {
-			Double monto = Double.parseDouble(request.getParameter("monto"));
-			if (usuario.getSaldo() >= monto) {
-				exitoso = usuarioDAO.retirar(monto, id);
-				if (exitoso > 0) {
-					session.setAttribute("status", "success");
-					response.sendRedirect("home");
-				} else {
-					session.setAttribute("status", "failed");
-					response.sendRedirect("home");
-				}
-			} else {
-				session.setAttribute("status", "failed");
-				response.sendRedirect("home");
-			}
-
-		}
-	}
-
+            if (operacionDepositar != null) {
+                Double monto = Double.parseDouble(request.getParameter("monto"));
+                int exitoso = usuarioDAO.depositar(monto, id);
+                if (exitoso > 0) {
+                    session.setAttribute("status", "success");
+                } else {
+                    session.setAttribute("status", "failed");
+                }
+            } else if (operacionRetirar != null) {
+                Double monto = Double.parseDouble(request.getParameter("monto"));
+                if (usuario.getSaldo() >= monto) {
+                    int exitoso = usuarioDAO.retirar(monto, id);
+                    if (exitoso > 0) {
+                        session.setAttribute("status", "success");
+                    } else {
+                        session.setAttribute("status", "failed");
+                    }
+                } else {
+                    session.setAttribute("status", "failed");
+                }
+            }
+            response.sendRedirect("home");
+        } else {
+            response.sendRedirect("login");
+        }
+    }
 }

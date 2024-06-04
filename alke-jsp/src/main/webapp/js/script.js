@@ -30,16 +30,16 @@ $(document).ready(function () {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   // Definir un arreglo de usuarios y contraseñas con correos electrónicos
-  const users = [
-    { username: "admin@example.com", password: "12345" },
-    { username: "user@example.com", password: "223344" },
-    // Puedes agregar más usuarios según sea necesario
-  ];
+  // const users = [
+  //   { username: "admin@example.com", password: "12345" },
+  //   { username: "user@example.com", password: "223344" },
+  //   // Puedes agregar más usuarios según sea necesario
+  // ];
 
   $("#loginForm").submit(function (event) {
     event.preventDefault();
-    let username = $("#username").val();
-    let password = $("#password").val();
+    // let username = $("#username").val();
+    // let password = $("#password").val();
 
     // Eliminar las alertas existentes al momento de enviar el formulario
     $("#liveAlertPlaceholder").empty();
