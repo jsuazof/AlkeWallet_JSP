@@ -10,9 +10,9 @@ import java.sql.Statement;
 public class DBConnection {
 	
 	
-	private static final String url = "jdbc:mysql://localhost:3306/alkewallet_jsp";
-	private static final String user = "root";
-	private static final String password = "<REMOVED_ROTATED_PASSWORD>";
+	private static final String url = System.getenv("DB_URL");
+	private static final String user = System.getenv("DB_USER");
+	private static final String password = System.getenv("DB_PASSWORD");
 	private static final String driver = "com.mysql.cj.jdbc.Driver";
 	private static Connection connection = null;
 	
